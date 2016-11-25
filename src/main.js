@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
+
+Vue.use(VueRouter)
+Vue.use(VueResource)
 
 // 导入主vue文件
 import App from './App'
@@ -8,9 +12,6 @@ import routes from './routes'
 
 // 引入全局css
 import 'common/stylus/index.styl'
-
-// 如果使用模块化机制编程， 要调用 Vue.use(VueRouter)
-Vue.use(VueRouter)
 
 // 实例路由
 const router = new VueRouter({
