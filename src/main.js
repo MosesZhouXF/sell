@@ -6,6 +6,9 @@ import App from './App'
 // 导入路由表
 import routes from './routes'
 
+// 引入全局css
+import 'common/stylus/index.styl'
+
 // 如果使用模块化机制编程， 要调用 Vue.use(VueRouter)
 Vue.use(VueRouter)
 
