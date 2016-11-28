@@ -27,8 +27,11 @@
                   <span class="connt">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
                 </div>
                 <div class="price">
-                  <span class="now">￥{{food.price}}</span>
+                  <span class="now">¥{{food.price}}</span>
                   <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                </div>
+                <div class="cartcontrol-wrapper">
+                  <cartcontrol :food="food"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -36,11 +39,14 @@
         </li>
       </ul>
     </div>
+    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import icon from '../../components/icon/icon'
+  import shopcart from '../../components/shopcart/shopcart'
+  import cartcontrol from '../../components/cartcontrol/cartcontrol'
   import BScroll from 'better-scroll'
 
   const ERR_OK = 0
@@ -68,10 +74,23 @@
           }
         }
         return 0
+      },
+      selectFoods() {
+        let foods = []
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food)
+            }
+          })
+        })
+        return foods
       }
     },
     components: {
-      icon
+      icon,
+      shopcart,
+      cartcontrol
     },
     created() {
       this.$http.get('/api/goods').then((response) => {
@@ -92,6 +111,7 @@
         })
 
         this.foodsScroll = new BScroll(document.getElementById('foods-wrapper'), {
+          click: true,
           probeType: 3
         })
 
@@ -110,12 +130,12 @@
         }
       },
       selectMenu(index, event) {
-        if(event._constructed) {
+        if (!event._constructed) {
           return
         }
         let foodList = document.getElementsByClassName('food-list-hook')
         let el = foodList[index]
-        this.foodScroll.scrollToElement()
+        this.foodsScroll.scrollToElement(el, 300)
       }
     }
   }
@@ -207,4 +227,8 @@
               font-size: 10px
               color: rgb(147, 153, 159)
 
+          .cartcontrol-wrapper
+            position: absolute
+            right: 0
+            bottom: 12px
 </style>
