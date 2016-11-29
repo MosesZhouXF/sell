@@ -31,6 +31,7 @@
         } else {
           this.food.count++
         }
+        this.$root.$emit('cart.add', event.target)
       },
       decreaseCart(event) {
         if (!event._constructed) {
@@ -42,6 +43,7 @@
       }
     }
   }
+
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

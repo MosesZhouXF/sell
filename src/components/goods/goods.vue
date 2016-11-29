@@ -1,6 +1,6 @@
 <template>
   <div class="goods">
-    <div class="menu-wrapper" id="menu-wrapper">
+    <div class="menu-wrapper" ref="menuWrapper">
       <ul>
         <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}"
             @click="selectMenu(index, $event)">
@@ -11,7 +11,7 @@
         </li>
       </ul>
     </div>
-    <div class="foods-wrapper" id="foods-wrapper">
+    <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
         <li v-for="item in goods" class="food-list food-list-hook">
           <h1 class="title">{{item.name}}</h1>
@@ -39,7 +39,8 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart>
+    <shopcart ref="shopcart" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"
+              :select-foods="selectFoods"></shopcart>
   </div>
 </template>
 
@@ -103,14 +104,17 @@
           })
         }
       })
+      this.$root.$on('cart.add', (target) => {
+        this._drop(target)
+      })
     },
     methods: {
       _initScroll() {
-        this.menuScroll = new BScroll(document.getElementById('menu-wrapper'), {
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {
           click: true
         })
 
-        this.foodsScroll = new BScroll(document.getElementById('foods-wrapper'), {
+        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
           click: true,
           probeType: 3
         })
@@ -128,6 +132,12 @@
           height += item.clientHeight
           this.listHeight.push(height)
         }
+      },
+      _drop(target) {
+        //  体验优化，异步执行下落动画
+        this.$nextTick(() => {
+          this.$refs.shopcart.drop(target)
+        })
       },
       selectMenu(index, event) {
         if (!event._constructed) {
