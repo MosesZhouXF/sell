@@ -231,7 +231,6 @@
           font-size: 10px
           color: #ffffff
           background: rgb(0, 160, 220)
-
       .info
         padding: 18px
         .title
