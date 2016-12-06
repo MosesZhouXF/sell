@@ -120,13 +120,13 @@
           })
         }
       })
-      this.$root.$on('ratingtype.select', (type) => {
+      this.$bus.on('ratingtype.select', (type) => {
         this.selectType = type
         this.$nextTick(() => {
           this.scroll.refresh()
         })
       })
-      this.$root.$on('content.toggle', (onlyContent) => {
+      this.$bus.on('content.toggle', (onlyContent) => {
         this.onlyContent = onlyContent
         this.$nextTick(() => {
           this.scroll.refresh()

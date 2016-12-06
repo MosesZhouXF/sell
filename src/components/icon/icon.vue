@@ -68,4 +68,14 @@
       bg-image('invoice_3')
     &.special_3
       bg-image('special_3')
+    &.decrease_4
+      bg-image('decrease_4')
+    &.discount_4
+      bg-image('discount_4')
+    &.guarantee_4
+      bg-image('guarantee_4')
+    &.invoice_4
+      bg-image('invoice_4')
+    &.special_4
+      bg-image('special_4')
 </style>

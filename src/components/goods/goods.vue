@@ -108,7 +108,7 @@
           })
         }
       })
-      this.$root.$on('cart.add', (target) => {
+      this.$bus.on('cart.add', (target) => {
         this._drop(target)
       })
     },

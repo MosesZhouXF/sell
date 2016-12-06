@@ -105,7 +105,7 @@
         if (!event._constructed) {
           return
         }
-        this.$root.$emit('cart.add', event.target)
+        this.$bus.emit('cart.add', event.target)
         Vue.set(this.food, 'count', 1)
       },
       needShow(type, text) {
@@ -131,13 +131,13 @@
       ratingselect
     },
     created() {
-      this.$root.$on('ratingtype.select', (type) => {
+      this.$bus.on('ratingtype.select', (type) => {
         this.selectType = type
         this.$nextTick(() => {
           this.scroll.refresh()
         })
       })
-      this.$root.$on('content.toggle', (onlyContent) => {
+      this.$bus.on('content.toggle', (onlyContent) => {
         this.onlyContent = onlyContent
         this.$nextTick(() => {
           this.scroll.refresh()

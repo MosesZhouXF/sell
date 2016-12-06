@@ -65,14 +65,14 @@
           return
         }
         this.selectType = type
-        this.$root.$emit('ratingtype.select', type)
+        this.$bus.emit('ratingtype.select', type)
       },
       toggleContent(event) {
         if (!event._constructed) {
           return
         }
         this.onlyContent = !this.onlyContent
-        this.$root.$emit('content.toggle', this.onlyContent)
+        this.$bus.emit('content.toggle', this.onlyContent)
       }
     }
   }

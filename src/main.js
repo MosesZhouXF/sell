@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import VueBus from 'vue-bus'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
+Vue.use(VueBus)
 
 // 导入主vue文件
 import App from './App'

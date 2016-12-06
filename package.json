@@ -12,6 +12,7 @@
   "dependencies": {
     "better-scroll": "^0.1.8",
     "vue": "^2.1.0",
+    "vue-bus": "^0.3.0",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.3"
   },
